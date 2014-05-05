@@ -1,0 +1,6 @@
+[submodule "lib/comp/LiquidTWI2"]
+	path = lib/comp/LiquidTWI2
+	url = https://github.com/lincomatic/LiquidTWI2.git
+[submodule "lib/comp/arduino_menusystem"]
+	path = lib/comp/arduino_menusystem
+	url = https://github.com/jonblack/arduino-menusystem.git

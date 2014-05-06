@@ -3,43 +3,35 @@
 #ifndef _MENUHANDLER_h
 #define _MENUHANDLER_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-
-#include "MenuSystem.h"
-#include "Wire.h"
-#include "LiquidTWI2.h"
+class LiquidTWI2;
+class MenuSystem;
+class Menu;
+class MyMenuItem;
+class MyMenuItemAction;
 
 class MenuHandler
 {
 
 private:
-	// Menu variables
-	MenuSystem m_menu;
-	Menu m_mRoot;
-	MenuItem m_mi1;
-	MenuItem m_mi2;
-	LiquidTWI2 m_lcd;
+  static const unsigned int LCD_I2C_ADDR;
+  // Menu variables
+  LiquidTWI2* m_lcd;
+  MenuSystem* m_menu;
+	Menu* m_mRoot;
+	MyMenuItem* m_mi1;
+	MyMenuItem* m_mi2;
 
 	void handleInput();
 	void displayMenu();
-
-protected:
-
 
 public:
 	MenuHandler();
 	virtual ~MenuHandler();
 	void init();
 
-	static void on_item1_selected(MenuItem* p_menu_item);
-	static void on_item2_selected(MenuItem* p_menu_item);
-
+private: // forbidden default functions
+	MenuHandler& operator = (const MenuHandler& src); // assignment operator
+	MenuHandler(const MenuHandler& src);              // copy constructor
 };
 
-
 #endif
-

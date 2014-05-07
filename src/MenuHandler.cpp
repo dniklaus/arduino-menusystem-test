@@ -14,7 +14,7 @@
 #include "MyMenuItem.h"
 #include "MenuHandler.h"
 
-class Item1MenuAction : public MyMenuItemAction
+class Item1MenuAction: public MyMenuItemAction
 {
 public:
   Item1MenuAction(MenuHandler* mHandler)
@@ -39,7 +39,7 @@ private: // forbidden default functions
   Item1MenuAction(const Item1MenuAction& src);              // copy constructor
 };
 
-class Item2MenuAction : public MyMenuItemAction
+class Item2MenuAction: public MyMenuItemAction
 {
 public:
   Item2MenuAction(MenuHandler* mHandler)
@@ -67,11 +67,11 @@ private: // forbidden default functions
 const unsigned int MenuHandler::LCD_I2C_ADDR = 0xC1;
 
 MenuHandler::MenuHandler()
-	: m_lcd(new LiquidTWI2(LCD_I2C_ADDR))
-    , m_menu(new MenuSystem())
-	, m_mRoot(new Menu("Root Menu"))
-	, m_mi1(new MyMenuItem("Item 1", m_mRoot, new Item1MenuAction(this)))
-	, m_mi2(new MyMenuItem("Item 2", m_mRoot, new Item2MenuAction(this)))
+: m_lcd(new LiquidTWI2(LCD_I2C_ADDR))
+, m_menu(new MenuSystem())
+, m_mRoot(new Menu("Root Menu"))
+, m_mi1(new MyMenuItem("Item 1", m_mRoot, new Item1MenuAction(this)))
+, m_mi2(new MyMenuItem("Item 2", m_mRoot, new Item2MenuAction(this)))
 { }
 
 MenuHandler::~MenuHandler()
@@ -79,34 +79,30 @@ MenuHandler::~MenuHandler()
 
 void MenuHandler::init()
 {
-	m_lcd->setMCPType(LTI_TYPE_MCP23017);
-	// set up the LCD's number of rows and columns:
-	m_lcd->begin(16, 2);
+  m_lcd->setMCPType(LTI_TYPE_MCP23017);
+  // set up the LCD's number of rows and columns:
+  m_lcd->begin(16, 2);
 
-	m_menu->set_root_menu(m_mRoot);
-	displayMenu();
-
+  m_menu->set_root_menu(m_mRoot);
+  displayMenu();
 }
 
 void MenuHandler::handleInput()
-{
-}
+{ }
 
 void MenuHandler::displayMenu()
 {
-	m_lcd->clear();
-	m_lcd->setCursor(0,0);
+  m_lcd->clear();
+  m_lcd->setCursor(0, 0);
 
-	// Display the menu
-	Menu const* cp_menu = m_menu->get_current_menu();
+  // Display the menu
+  Menu const* cp_menu = m_menu->get_current_menu();
 
-	//m_lcd.print("Current menu name: ");
-	m_lcd->print(cp_menu->get_name());
+  //m_lcd.print("Current menu name: ");
+  m_lcd->print(cp_menu->get_name());
 
-	m_lcd->setCursor(0,1);
+  m_lcd->setCursor(0, 1);
 
-	m_lcd->print(cp_menu->get_selected()->get_name());
+  m_lcd->print(cp_menu->get_selected()->get_name());
 }
-
-
 

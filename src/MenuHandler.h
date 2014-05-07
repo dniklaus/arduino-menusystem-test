@@ -17,17 +17,17 @@ private:
   // Menu variables
   LiquidTWI2* m_lcd;
   MenuSystem* m_menu;
-	Menu* m_mRoot;
-	MyMenuItem* m_mi1;
-	MyMenuItem* m_mi2;
+  Menu* m_mRoot;
+  MyMenuItem* m_mi1;
+  MyMenuItem* m_mi2;
 
-	void handleInput();
-	void displayMenu();
+  void handleInput();
+  void displayMenu();
 
 public:
-	MenuHandler();
-	virtual ~MenuHandler();
-	void init();
+  MenuHandler();
+  virtual ~MenuHandler();
+  void init();
 
 private: // forbidden default functions
 	MenuHandler& operator = (const MenuHandler& src); // assignment operator

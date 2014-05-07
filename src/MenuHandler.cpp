@@ -21,8 +21,6 @@ public:
   : m_mHandler(mHandler)
   { }
 
-  virtual ~Item1MenuAction() { }
-
   void handle()
   {
     if (0 != m_mHandler)
@@ -45,8 +43,6 @@ public:
   Item2MenuAction(MenuHandler* mHandler)
   : m_mHandler(mHandler)
   { }
-
-  virtual ~Item2MenuAction() { }
 
   void handle()
   {

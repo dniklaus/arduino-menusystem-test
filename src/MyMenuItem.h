@@ -12,8 +12,17 @@
 
 class MyMenuItemAction
 {
+protected:
+  // interface class, constructor forbidden
+  MyMenuItemAction() { }
+
 public:
+  virtual ~MyMenuItemAction() { }
   virtual void handle() = 0;
+
+private: // forbidden default functions
+  MyMenuItemAction& operator = (const MyMenuItemAction& src); // assignment operator
+  MyMenuItemAction(const MyMenuItemAction& src);              // copy constructor
 };
 
 class Menu;
@@ -31,6 +40,10 @@ public:
 
 private:
   MyMenuItemAction* m_action;
+
+private: // forbidden default functions
+  MyMenuItem& operator = (const MyMenuItem& src); // assignment operator
+  MyMenuItem(const MyMenuItem& src);              // copy constructor
 };
 
 #endif /* MYMENUITEM_H_ */

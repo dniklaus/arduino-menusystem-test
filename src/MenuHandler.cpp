@@ -75,7 +75,18 @@ MenuHandler::MenuHandler()
 { }
 
 MenuHandler::~MenuHandler()
-{ }
+{
+  delete m_mi1->action();
+  delete m_mi1; m_mi1 = 0;
+
+  delete m_mi2->action();
+  delete m_mi2; m_mi2 = 0;
+
+  delete m_mRoot; m_mRoot = 0;
+  delete m_menu;  m_menu  = 0;
+
+  delete m_lcd;   m_lcd   = 0;
+}
 
 void MenuHandler::init()
 {

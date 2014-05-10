@@ -25,8 +25,12 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/comp/arduino_menusystem}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/comp/LiquidTWI2}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/Libraries/LiquidCrystal}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/Libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/Libraries/Wire/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/plat/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/comp/LcdKeypad}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/plat/Debounce}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.473312369" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -36,8 +40,12 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/arduino/variant}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/comp/arduino_menusystem}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/comp/LiquidTWI2}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/Libraries/LiquidCrystal}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/Libraries/Wire}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/Libraries/Wire/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/plat/Timer}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/comp/LcdKeypad}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/arduino_menusystem_test/plat/Debounce}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1405026872" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>

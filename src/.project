@@ -32,6 +32,16 @@
 			<locationURI>virtual:/virtual</locationURI>
 		</link>
 		<link>
+			<name>plat</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>Libraries/LiquidCrystal</name>
+			<type>2</type>
+			<locationURI>ArduinoLibPath/LiquidCrystal</locationURI>
+		</link>
+		<link>
 			<name>Libraries/Wire</name>
 			<type>2</type>
 			<locationURI>ArduinoHardwareLibPath/Wire</locationURI>
@@ -47,6 +57,11 @@
 			<locationURI>ArduinoPinPath/mega</locationURI>
 		</link>
 		<link>
+			<name>comp/LcdKeypad</name>
+			<type>2</type>
+			<locationURI>arduino_menusystem_testLcdKeypad/LcdKeypad</locationURI>
+		</link>
+		<link>
 			<name>comp/LiquidTWI2</name>
 			<type>2</type>
 			<locationURI>arduino_menusystem_testLiquidTWI2/LiquidTWI2</locationURI>
@@ -55,6 +70,16 @@
 			<name>comp/arduino_menusystem</name>
 			<type>2</type>
 			<locationURI>arduino_menusystem_testarduino_menusystem/arduino_menusystem</locationURI>
+		</link>
+		<link>
+			<name>plat/Debounce</name>
+			<type>2</type>
+			<locationURI>arduino_menusystem_testDebounce/Debounce</locationURI>
+		</link>
+		<link>
+			<name>plat/Timer</name>
+			<type>2</type>
+			<locationURI>arduino_menusystem_testTimer/Timer</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>

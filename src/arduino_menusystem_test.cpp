@@ -2,7 +2,7 @@
 #include "arduino_menusystem_test.h"
 
 #include "MenuHandler.h"
-#include "TimerContext.h"
+#include "Timer.h"
 
 MenuHandler* menuHandler = 0;
 
@@ -56,5 +56,5 @@ void serialEvent()
 // The loop function is called in an endless loop
 void loop()
 {
-  TimerContext::instance()->handleTick();
+  scheduleTimers();
 }

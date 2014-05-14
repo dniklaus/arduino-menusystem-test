@@ -2,6 +2,7 @@
 #include "arduino_menusystem_test.h"
 
 #include "MenuHandler.h"
+#include "LcdKeypad.h"
 #include "Timer.h"
 
 MenuHandler* menuHandler = 0;
@@ -17,6 +18,7 @@ void setup()
   Serial.println("Hello from Arduino MenuSystem Test!");
   Serial.println("-----------------------------------------------------------------");
   Serial.println("Press 'l' or 'a' for left, 'r' or 'd' for right, 's' for select");
+  Serial.println("Press 'o' for LCD Backlight On, 'k' for LCD Backlight Off");
   Serial.println("-----------------------------------------------------------------\n");
 
   //---------------------------------------------------------------------------
@@ -49,6 +51,14 @@ void serialEvent()
     else if (('r' == inChar) || ('d' == inChar))
     {
       menuHandler->rightKeyEvent();
+    }
+    else if ('o' == inChar)
+    {
+      menuHandler->lcd()->setBackLightOn(true);
+    }
+    else if ('k' == inChar)
+    {
+      menuHandler->lcd()->setBackLightOn(false);
     }
   }
 }

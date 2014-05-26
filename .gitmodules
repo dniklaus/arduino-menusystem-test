@@ -10,6 +10,3 @@
 [submodule "lib/plat/timer"]
 	path = lib/plat/timer
 	url = https://code.google.com/p/arduino-utils-timer/
-[submodule "lib/plat/debounce"]
-	path = lib/plat/debounce
-	url = https://code.google.com/p/arduino-utils-debounce/

@@ -72,11 +72,6 @@
 			<locationURI>arduino_menusystem_testarduino_menusystem/arduino_menusystem</locationURI>
 		</link>
 		<link>
-			<name>plat/Debounce</name>
-			<type>2</type>
-			<locationURI>arduino_menusystem_testDebounce/Debounce</locationURI>
-		</link>
-		<link>
 			<name>plat/Timer</name>
 			<type>2</type>
 			<locationURI>arduino_menusystem_testTimer/Timer</locationURI>

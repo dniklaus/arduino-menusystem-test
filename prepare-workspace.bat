@@ -36,13 +36,17 @@ set ArduinoRevs=%ArduinoTools%\arduino_revs
 set CurArduino=%ArduinoRevs%\arduino-%ArduinoVer%
 
 set Archiver=%ThisProjTools%\7za920\7za.exe
-set Curl= %ThisProjTools%\curl\curl.exe
+set Curl=%ThisProjTools%\curl\curl.exe
+set Git="%ProgramFiles%\Git\bin\git.exe"
 
 ::-----------------------------------------------------------------------------
 :: Get the tools
 ::-----------------------------------------------------------------------------
 :: Arduino IDE
 if not exist "%CurArduino%" (
+  if not exist "%ArduinoRevs%" (
+    md "%ArduinoRevs%"
+  )
   if not exist "%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" (
     %Curl% -# -o "%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" "%ArduinoDownloadUrl%/arduino-%ArduinoVer%-windows.zip"
   )
@@ -54,6 +58,9 @@ mklink /J %ThisProjTools%\arduino %CurArduino%
 
 :: Eclipse Arduino Workbench Bundle
 if not exist "%CurEclipseArduino%" (
+  if not exist "%EclipseArduinoRevs%" (
+    md "%EclipseArduinoRevs%"
+  )
   if not exist "%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz" (
     %Curl% -# -o "%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz" "%EclipseArduinoDownloadUrl%/%OsVariant%.%EclipseArduinoVer%.tar.gz"
   )
@@ -75,6 +82,6 @@ if not exist "%WorkspaceDir%\.metadata" (
 :: run first build, would fail
 call build.bat
 :: revert src/.project that have been made dirty by the failing build
-"C:\Program Files (x86)\Git\bin\git.exe" checkout -- src/.project
+%Git% checkout -- src/.project
 
 ::pause

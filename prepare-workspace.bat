@@ -69,4 +69,12 @@ if not exist "%WorkspaceDir%\.metadata" (
   %Archiver% x -y -o%WorkspaceDir% "%WorkspaceDir%\.metadata.zip"
 )
 
+::-----------------------------------------------------------------------------
+:: Perform Workaround Eclipse Arduino Bug (removed Library links in .project file after first [failing] build)
+::-----------------------------------------------------------------------------
+:: run first build, would fail
+call build.bat
+:: revert src/.project that have been made dirty by the failing build
+"C:\Program Files (x86)\Git\bin\git.exe" checkout -- src/.project
+
 ::pause

@@ -7,4 +7,4 @@ set WorkspaceDir=%ProjectHome%\workspace
 set ThisProjTools=%ProjectHome%\tools
 
 :: Run the workbench
-start %ThisProjTools%\eclipseArduino\eclipseArduinoIDE.exe %WorkspaceDir%
+start %ThisProjTools%\eclipseArduino\eclipseArduinoIDE.exe -data %WorkspaceDir% -nosplash

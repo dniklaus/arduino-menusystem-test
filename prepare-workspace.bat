@@ -93,10 +93,11 @@ if not exist "%WorkspaceDir%\.metadata" (
 ::-----------------------------------------------------------------------------
 :: run first build, would fail
 call build.bat
+if %errorlevel% == 0 goto end
 :: revert src/.project that have been made dirty by the failing build
-%Git% checkout -- src/.project
+%Git% checkout -- %ProjectHome%\src\.project
 
 :error
+pause
 
-
-::pause
+:end

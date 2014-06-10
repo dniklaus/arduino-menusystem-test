@@ -11,6 +11,9 @@ set EclipseArduinoDownloadUrl=http://www.baeyens.it/eclipse/download/product
 set EclipseArduinoVer=2014-05-22_02-07-31
 ::set EclipseArduinoVer=2014-05-15_02-07-18
 
+:: Expected Project Location (Eclipse CDT cannot deal with relative paths)
+set ExpectedProjectHome=C:\git\arduino-projects\arduino-menusystem-test\
+
 ::-----------------------------------------------------------------------------
 :: Get the OS Variant
 ::-----------------------------------------------------------------------------
@@ -28,6 +31,15 @@ set ProjectHome=%SCRIPT_DIR%
 set WorkspaceDir=%ProjectHome%\workspace
 set ArduinoTools=%ProjectHome%\..\Tools
 set ThisProjTools=%ProjectHome%\tools
+
+::-----------------------------------------------------------------------------
+:: Assert correct path
+::-----------------------------------------------------------------------------$
+if not "%ExpectedProjectHome%"=="%ProjectHome%" (
+  echo "Please install this project %ProjectHome% here: %ExpectedProjectHome% otherwise you would not be able to compile."
+  goto error
+)
+
 
 set EclipseArduinoRevs=%ArduinoTools%\eclipseArduino_revs
 set CurEclipseArduino=%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%\eclipseArduino
@@ -83,5 +95,8 @@ if not exist "%WorkspaceDir%\.metadata" (
 call build.bat
 :: revert src/.project that have been made dirty by the failing build
 %Git% checkout -- src/.project
+
+:error
+
 
 ::pause

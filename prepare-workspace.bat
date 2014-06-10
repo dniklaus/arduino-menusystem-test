@@ -49,7 +49,13 @@ set CurArduino=%ArduinoRevs%\arduino-%ArduinoVer%
 
 set Archiver=%ThisProjTools%\7za920\7za.exe
 set Curl=%ThisProjTools%\curl\curl.exe
-set Git="%ProgramFiles%\Git\bin\git.exe"
+
+if OsVariant==win32 (
+  set Git="%ProgramFiles%\Git\bin\git.exe"
+) else (
+  set Git="%ProgramFiles(x86)%\Git\bin\git.exe"
+)
+
 
 ::-----------------------------------------------------------------------------
 :: Get the tools

@@ -49,6 +49,7 @@ set CurArduino=%ArduinoRevs%\arduino-%ArduinoVer%
 
 set Archiver=%ThisProjTools%\7za920\7za.exe
 set Curl=%ThisProjTools%\curl\curl.exe
+set Wget=%ThisProjTools%\wget\wget.exe
 
 if OsVariant==win32 (
   set Git="%ProgramFiles%\Git\bin\git.exe"
@@ -66,7 +67,8 @@ if not exist "%CurArduino%" (
     md "%ArduinoRevs%"
   )
   if not exist "%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" (
-    %Curl% -# -o "%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" "%ArduinoDownloadUrl%/arduino-%ArduinoVer%-windows.zip"
+    ::%Curl% -# -o "%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" "%ArduinoDownloadUrl%/arduino-%ArduinoVer%-windows.zip"
+    %Wget% --tries=0 --output-document="%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" "%ArduinoDownloadUrl%/arduino-%ArduinoVer%-windows.zip"
   )
   %Archiver% x -y -o%ArduinoRevs% %ArduinoRevs%\arduino-%ArduinoVer%-windows.zip
 )
@@ -80,7 +82,8 @@ if not exist "%CurEclipseArduino%" (
     md "%EclipseArduinoRevs%"
   )
   if not exist "%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz" (
-    %Curl% -# -o "%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz" "%EclipseArduinoDownloadUrl%/%OsVariant%.%EclipseArduinoVer%.tar.gz"
+    ::%Curl% -# -o "%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz" "%EclipseArduinoDownloadUrl%/%OsVariant%.%EclipseArduinoVer%.tar.gz"
+    %Wget% --tries=0 --output-document="%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz" "%EclipseArduinoDownloadUrl%/%OsVariant%.%EclipseArduinoVer%.tar.gz"
   )
   %Archiver% x -y -o%EclipseArduinoRevs% %EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz
   %Archiver% x -y -o%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer% %EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar

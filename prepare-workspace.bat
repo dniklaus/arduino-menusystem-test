@@ -1,4 +1,4 @@
-::@echo off
+@echo off
 ::-----------------------------------------------------------------------------
 :: Configured Settings
 ::-----------------------------------------------------------------------------
@@ -12,7 +12,8 @@ set EclipseArduinoVer=2014-05-22_02-07-31
 ::set EclipseArduinoVer=2014-05-15_02-07-18
 
 :: Expected Project Location (Eclipse CDT cannot deal with relative paths)
-set ExpectedProjectHome=C:\git\arduino-projects\arduino-menusystem-test\
+set ArduinoProjects=C:\git\arduino-projects
+set ExpectedProjectHome=%ArduinoProjects%\arduino-menusystem-test\
 
 ::-----------------------------------------------------------------------------
 :: Get the OS Variant
@@ -34,29 +35,54 @@ set ThisProjTools=%ProjectHome%\tools
 
 ::-----------------------------------------------------------------------------
 :: Assert correct path
-::-----------------------------------------------------------------------------$
+::-----------------------------------------------------------------------------
 if not "%ExpectedProjectHome%"=="%ProjectHome%" (
-  echo "Please install this project %ProjectHome% here: %ExpectedProjectHome% otherwise you would not be able to compile."
-  goto error
+  msg "%username%" Please install this project %ProjectHome% here: %ExpectedProjectHome% - otherwise you would not be able to compile.
+  if not exist "%ArduinoProjects%" (
+    md "%ArduinoProjects%"
+  )
+  goto end
 )
 
 
-set EclipseArduinoRevs=%ArduinoTools%\eclipseArduino_revs
-set CurEclipseArduino=%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%\eclipseArduino
-
+::-----------------------------------------------------------------------------
+:: Set the tools' paths
+::-----------------------------------------------------------------------------
+:: Arduino IDE
 set ArduinoRevs=%ArduinoTools%\arduino_revs
 set CurArduino=%ArduinoRevs%\arduino-%ArduinoVer%
 
+:: Eclipse Arduino Workbench Bundle
+set EclipseArduinoRevs=%ArduinoTools%\eclipseArduino_revs
+set CurEclipseArduino=%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%\eclipseArduino
+
+:: 7Zip
 set Archiver=%ThisProjTools%\7za920\7za.exe
+
+:: curl (unused)
 set Curl=%ThisProjTools%\curl\curl.exe
+
+:: wget
 set Wget=%ThisProjTools%\wget\wget.exe
 
+:: git
 if "%OsVariant%"=="win32" (
   set Git="%ProgramFiles%\Git\bin\git.exe"
 ) else (
   set Git="%ProgramFiles(x86)%\Git\bin\git.exe"
 )
 
+::-----------------------------------------------------------------------------
+:: Assert untouched .project file
+::-----------------------------------------------------------------------------
+:: ensure that src/.project has not been changed
+set statusResult=
+for /f "delims=" %%a in ('%%Git%% status --porcelain %%ProjectHome%%\src\.project') do @set statusResult=%%a
+echo "%statusResult%"
+if not "%statusResult%"=="" (
+  msg "%username%" The file %ProjectHome%\src\.project is already touched. This script shall only be run on a vanilla project just cloned before.
+  goto end
+)
 
 ::-----------------------------------------------------------------------------
 :: Get the tools
@@ -71,6 +97,9 @@ if not exist "%CurArduino%" (
     %Wget% --tries=0 --output-document="%ArduinoRevs%\arduino-%ArduinoVer%-windows.zip" "%ArduinoDownloadUrl%/arduino-%ArduinoVer%-windows.zip"
   )
   %Archiver% x -y -o%ArduinoRevs% %ArduinoRevs%\arduino-%ArduinoVer%-windows.zip
+  if %errorlevel% == 0 (
+    del %ArduinoRevs%\arduino-%ArduinoVer%-windows.zip
+  )
 )
 :: create softlink (junction) for Arduino IDE in current project tools
 rmdir %ThisProjTools%\arduino
@@ -87,6 +116,10 @@ if not exist "%CurEclipseArduino%" (
   )
   %Archiver% x -y -o%EclipseArduinoRevs% %EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz
   %Archiver% x -y -o%EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer% %EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar
+  if %errorlevel% == 0 (
+    del %EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar.gz
+	del %EclipseArduinoRevs%\%OsVariant%.%EclipseArduinoVer%.tar
+  )
 )
 :: create softlink (junction) for Eclipse Arduino Workbench Bundle in current project tools
 rmdir %ThisProjTools%\eclipseArduino
@@ -107,6 +140,7 @@ if %errorlevel% == 0 goto end
 %Git% checkout -- %ProjectHome%\src\.project
 
 :error
-pause
+msg "%username%" An error occured!
+::pause
 
 :end

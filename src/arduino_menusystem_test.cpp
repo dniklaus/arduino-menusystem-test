@@ -66,5 +66,5 @@ void serialEvent()
 // The loop function is called in an endless loop
 void loop()
 {
-  scheduleTimers();
+  yield();
 }

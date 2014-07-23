@@ -73,6 +73,7 @@ public:
 private:
   MenuHandler* m_menuHandler;
 
+public:
   void handleKeyChanged(LcdKeypad::Key newKey)
   {
     Serial.print("MyLcdKeypadAdapter::handleKeyChanged(), newKey: ");

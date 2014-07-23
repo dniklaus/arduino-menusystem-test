@@ -10,3 +10,4 @@
 [submodule "lib/plat/timer"]
 	path = lib/plat/timer
 	url = https://code.google.com/p/arduino-utils-timer/
+	branch = branch_2.1.1

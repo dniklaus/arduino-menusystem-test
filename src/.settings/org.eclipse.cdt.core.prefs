@@ -52,7 +52,7 @@ environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.USE_ARCHIVER/value=true
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT.PATH/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT.PATH/operation=replace
-environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT.PATH/value=${ArduinoPath}/hardware/arduino/avr/variants/${A.BUILD.VARIANT}
+environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT.PATH/value=/C\:/git/arduino-projects/arduino-menusystem-test/tools/arduino/hardware/arduino/avr/variants/${A.BUILD.VARIANT}
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT/operation=replace
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/A.BUILD.VARIANT/value=mega
@@ -268,7 +268,7 @@ environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.B
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.BOARD_NAME/value=Arduino Mega 2560 or Mega ADK
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.COM_PORT/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.COM_PORT/operation=replace
-environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.COM_PORT/value=COM5
+environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.COM_PORT/value=COM21
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.CPU\ SPEED/delimiter=;
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.CPU\ SPEED/operation=replace
 environment/project/it.baeyens.arduino.core.toolChain.release.135162755/JANTJE.CPU\ SPEED/value=

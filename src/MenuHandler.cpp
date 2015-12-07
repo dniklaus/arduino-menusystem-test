@@ -66,7 +66,7 @@ private: // forbidden default functions
 class MyLcdKeypadAdapter : public LcdKeypadAdapter
 {
 public:
-  MyLcdKeypadAdapter(/*LcdKeypad* lcdKeypad*/ MenuHandler* menuHandler = 0)
+  MyLcdKeypadAdapter(MenuHandler* menuHandler = 0)
   : m_menuHandler(menuHandler)
   { }
 
@@ -118,7 +118,7 @@ public:
 //const unsigned int MenuHandler::LCD_I2C_ADDR = 0xC1;
 
 MenuHandler::MenuHandler()
-: m_lcd(new LcdKeypad() /*new LiquidTWI2(LCD_I2C_ADDR)*/)
+: m_lcd(new LcdKeypad())
 , m_menu(new MenuSystem())
 , m_mRoot(new Menu("Root Menu"))
 , m_mi1(new MyMenuItem("Item 1", m_mRoot, new Item1MenuAction(this)))
@@ -126,7 +126,10 @@ MenuHandler::MenuHandler()
 , m_isItem1Active(false)
 , m_isItem2Active(false)
 {
-  m_lcd->attachAdapter(new MyLcdKeypadAdapter(this));
+  if (0 != m_lcd)
+  {
+    m_lcd->attachAdapter(new MyLcdKeypadAdapter(this));
+  }
 }
 
 MenuHandler::~MenuHandler()
@@ -140,7 +143,7 @@ MenuHandler::~MenuHandler()
   delete m_mRoot; m_mRoot = 0;
   delete m_menu;  m_menu  = 0;
 
-  delete m_lcd; m_lcd   = 0;
+  delete m_lcd; m_lcd = 0;
 }
 
 void MenuHandler::init()

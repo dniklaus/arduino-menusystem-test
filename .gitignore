@@ -5,3 +5,4 @@
 /tools/arduino
 /tools/eclipseArduino
 /src/.settings/language.settings.xml
+/src/.settings/org.eclipse.cdt.core.prefs

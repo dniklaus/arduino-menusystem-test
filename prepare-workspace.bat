@@ -1,20 +1,33 @@
 @echo off
 ::-----------------------------------------------------------------------------
+:: Paths
+::-----------------------------------------------------------------------------
+set SCRIPT_DIR=%~dp0%
+set ProjectHome=%SCRIPT_DIR:~0,-1%
+set WorkspaceDir=%ProjectHome%\workspace
+set ArduinoTools=%ProjectHome%\..\Tools
+set ThisProjTools=%ProjectHome%\tools
+
+::-----------------------------------------------------------------------------
+:: Load Script Environment / Configuration
+::-----------------------------------------------------------------------------
+for /f "delims=" %%x in (%ProjectHome%\env.config) do (set "%%x")
+
+
+::-----------------------------------------------------------------------------
 :: Configured Settings
 ::-----------------------------------------------------------------------------
 :: Arduino IDE (see http://arduino.cc/en/Main/OldSoftwareReleases) 
-set ArduinoDownloadUrl=http://downloads.arduino.cc
-set ArduinoVer=1.5.2
+::set ArduinoDownloadUrl=http://arduino.cc/download.php?f=
+::set ArduinoVer=1.5.6-r2 ::to be set in env.config
 
 :: Eclipse Arduino Workbench Bundle (see http://www.baeyens.it/eclipse/download.php)
-set EclipseArduinoDownloadUrl=http://www.baeyens.it/eclipse/download/product
-set EclipseArduinoVer=2014-07-02_17-56-02
-::set EclipseArduinoVer=2014-05-22_02-07-31
-::set EclipseArduinoVer=2014-05-15_02-07-18
+::set EclipseArduinoDownloadUrl=http://www.baeyens.it/eclipse/download/product
+::set EclipseArduinoVer=2015-01-13_02-06-58 ::to be set in env.config
 
 :: Expected Project Location (Eclipse CDT cannot deal with relative paths)
-set ArduinoProjects=C:\git\arduino-projects
-set ExpectedProjectHome=%ArduinoProjects%\arduino-menusystem-test\
+:: set ArduinoProjects=C:\git\arduino-projects ::to be set in env.config
+set ExpectedProjectHome=%ArduinoProjects%\%ProjectSubDir%
 
 ::-----------------------------------------------------------------------------
 :: Get the OS Variant
@@ -24,15 +37,6 @@ IF "%PROCESSOR_ARCHITECTURE%;%PROCESSOR_ARCHITEW6432%"=="x86;" (
 ) ELSE (
   set OsVariant=win64
 )
-
-::-----------------------------------------------------------------------------
-:: Paths
-::-----------------------------------------------------------------------------
-set SCRIPT_DIR=%~dp0%
-set ProjectHome=%SCRIPT_DIR%
-set WorkspaceDir=%ProjectHome%\workspace
-set ArduinoTools=%ProjectHome%\..\Tools
-set ThisProjTools=%ProjectHome%\tools
 
 ::-----------------------------------------------------------------------------
 :: Assert correct path
@@ -81,6 +85,12 @@ if not "%statusResult%"=="" (
   msg "%username%" The file %ProjectHome%\src\.project is already touched. This script shall only be run on a vanilla project just cloned before.
   goto end
 )
+
+::-----------------------------------------------------------------------------
+:: Prepare org.eclipse.cdt.core.prefs file from template
+::-----------------------------------------------------------------------------
+:: Eclipse Arduino IDE applies changes to org.eclipse.cdt.core.prefs, copy from template before
+copy %ProjectHome%\src\.settings\org.eclipse.cdt.core.prefs-template %ProjectHome%\src\.settings\org.eclipse.cdt.core.prefs
 
 ::-----------------------------------------------------------------------------
 :: Get the tools
@@ -134,6 +144,10 @@ call build.bat
 if %errorlevel% == 0 goto end
 :: revert src/.project that have been made dirty by the failing build
 %Git% checkout -- %ProjectHome%\src\.project
+
+:: run second build
+call build.bat
+if %errorlevel% == 0 goto end
 
 :error
 msg "%username%" An error occured!

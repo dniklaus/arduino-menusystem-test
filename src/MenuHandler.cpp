@@ -128,6 +128,7 @@ MenuHandler::MenuHandler()
   if (0 != m_lcd)
   {
     m_lcd->attachAdapter(new MyLcdKeypadAdapter(this));
+    m_lcd->setBackLightOn(true);
   }
 }
 
@@ -147,11 +148,6 @@ MenuHandler::~MenuHandler()
 
 void MenuHandler::init()
 {
-//  m_lcd->setMCPType(LTI_TYPE_MCP23017);
-  // set up the LCD's number of rows and columns:
-  m_lcd->begin(16, 2);
-  m_lcd->setBackLightOn(true);
-
   m_menu->set_root_menu(m_mRoot);
   displayMenu();
 }
@@ -178,36 +174,38 @@ void MenuHandler::handleInput()
 
 void MenuHandler::displayMenu()
 {
-  m_lcd->clear();
-  m_lcd->setCursor(0, 0);
-
-  // Display the menu
-  Menu const* cp_menu = m_menu->get_current_menu();
-
-  //m_lcd.print("Current menu name: ");
-  m_lcd->print(cp_menu->get_name());
-
-  m_lcd->setCursor(0, 1);
-
-  m_lcd->print(cp_menu->get_selected()->get_name());
-  m_lcd->print("    ");
-
-  bool isMenuItemActive = false;
-  const char* selectedName = const_cast<char*>(cp_menu->get_selected()->get_name());
-  if (0 == strcmp(selectedName, m_mi1->get_name()))
+  if (0 != m_lcd)
   {
-    isMenuItemActive = isItem1Active();
-    Serial.print("MenuHandler::displayMenu(), m_mi1->get_name() matches selectedName: ");
-    Serial.println(selectedName);
-  }
-  if (0 == strcmp(selectedName, m_mi2->get_name()))
-  {
-    isMenuItemActive = isItem2Active();
-    Serial.print("MenuHandler::displayMenu(), m_mi2->get_name() matches selectedName: ");
-    Serial.println(selectedName);
-  }
+    m_lcd->clear();
+    m_lcd->setCursor(0, 0);
 
-  m_lcd->print(isMenuItemActive ? "active" : "      ");
+    // Display the menu
+    Menu const* cp_menu = m_menu->get_current_menu();
+
+    //m_lcd.print("Current menu name: ");
+    m_lcd->print(cp_menu->get_name());
+
+    m_lcd->setCursor(0, 1);
+
+    m_lcd->print(cp_menu->get_selected()->get_name());
+    m_lcd->print("    ");
+
+    bool isMenuItemActive = false;
+    const char* selectedName = const_cast<char*>(cp_menu->get_selected()->get_name());
+    if (0 == strcmp(selectedName, m_mi1->get_name()))
+    {
+      isMenuItemActive = isItem1Active();
+      Serial.print("MenuHandler::displayMenu(), m_mi1->get_name() matches selectedName: ");
+      Serial.println(selectedName);
+    }
+    if (0 == strcmp(selectedName, m_mi2->get_name()))
+    {
+      isMenuItemActive = isItem2Active();
+      Serial.print("MenuHandler::displayMenu(), m_mi2->get_name() matches selectedName: ");
+      Serial.println(selectedName);
+    }
+    m_lcd->print(isMenuItemActive ? "active" : "      ");
+  }
 }
 
 LcdKeypad* MenuHandler::lcd()
